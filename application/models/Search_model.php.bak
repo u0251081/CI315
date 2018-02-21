@@ -1,0 +1,66 @@
+<?php
+	class Search_model extends CI_Model {
+		public function __construct() {
+			$this->load->database();
+		}
+		
+		public function get_colleges_a($abbr = FALSE) {
+			if ($abbr === FALSE) {
+				$query = $this->db->get('colleges');
+				return $query->result_array();
+			}
+		}
+		
+		public function get_departments_ea($eabbr = FALSE) {
+			if ($eabbr === FALSE) {
+				$query = $this->db->get('departments');
+				return $query->result_array();
+			}
+		}
+		
+		public function get_faculty($condition = FALSE, $page = FALSE) {
+			if ($condition === FALSE) {
+				// $query = $this->db->get('facultyMember');
+				$qString = 'select c_cname, d_cname,d_cabbr, name, PP, phone, extension, fax, email, specialized, classify from faculty ';
+				$qString .= 'left join colleges on College = colleges.c_abbr ';
+				$qString .= 'left join departments on Department = departments.d_eabbr ';
+				if ($page === FALSE) $qString .= 'limit 0,10;';
+				$query = $this->db->query($qString);
+				return $query->result_array();
+			} else {
+				$qString = 'select c_cname, d_cname,d_cabbr, name, PP, phone, extension, fax, email, specialized, classify from faculty ';
+				$qString .= 'left join colleges on College = colleges.c_abbr ';
+				$qString .= 'left join departments on Department = departments.d_eabbr ';
+				$qString .= 'where c_cname like "%'.$condition.'%"';
+				$qString .= ' or d_cname like "%'.$condition.'%"';
+				$qString .= ' or d_cabbr like "%'.$condition.'%"';
+				$qString .= ' or name like "%'.$condition.'%"';
+				$qString .= ' or PP like "%'.$condition.'%"';
+				$qString .= ' or phone like "%'.$condition.'%"';
+				$qString .= ' or extension like "%'.$condition.'%"';
+				$qString .= ' or fax like "%'.$condition.'%"';
+				$qString .= ' or email like "%'.$condition.'%"';
+				$qString .= ' or specialized like "%'.$condition.'%"';
+				$qString .= ' or classify like "%'.$condition.'%"';
+				// if ($page === FALSE) $qString .= 'limit 0,10;';
+				$query = $this->db->query($qString);
+				return $query->result_array();
+				$return = array(
+					'0'=>array(
+						 'c_cname' => '工學院',
+						 'd_cname' => '系統資訊與控制研究所',
+						 'd_cabbr' => '資控所',
+						 'name' => '周至宏',
+						 'PP' => '教　授',
+						 'phone' => '(07)601-1000',
+						 'extension' => '2218',
+						 'fax' => '(07)601-1239',
+						 'email' => 'choujh@nkfust.edu.tw',
+						 'specialized' => '智慧型技術與控制、最佳化技術與應用、品質工程、自動化技術及系統整合',
+						 'classify' => '工程技術類'
+					)
+				);
+				return $return;
+			}
+		}
+	}

@@ -1,0 +1,27 @@
+<meta charset='utf-8'>
+<!-- <form action='input_proc.php' method='post' enctype='multipart/form-data'> -->
+<?php echo form_open_multipart('activity/create');?>
+	標題:<input type='text' name='title'> <br>
+	日期:<input type='date' name='date' > <br>
+	內容:<br><textarea style='height:200; width:500' name='context'></textarea><br>
+	圖片:<div id="uparea">
+	</div>
+	<input type='button' id="addbtn" value='upfile'><br>
+	<input type='submit'>
+</form>
+<script>
+	var x = 0;
+	var max = 5;
+	document.getElementById('addbtn').onclick = function(e) {
+		if (x < max) {
+			x ++;
+			var uparea = document.getElementById('uparea');
+			var ediv = document.createElement('div');
+			var htmldata  = '<input type="file" name="myfile'+x+'">';
+			ediv.innerHTML = htmldata;
+			uparea.appendChild(ediv);
+		} else {
+			
+		}
+	};
+</script>

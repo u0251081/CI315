@@ -1,0 +1,73 @@
+{
+        id: "190_0",
+        name: "Fuck",
+        children: [
+                    {
+                        id: "107877_3",
+                        name: "Neil Young &amp; Pearl Jam",
+                        data: {
+                            relation: "<h4>Neil Young &amp; Pearl Jam</h4><b>Connections:</b><ul><li>Pearl Jam <div>(relation: collaboration)</div></li><li>Neil Young <div>(relation: collaboration)</div></li></ul>"
+                        },
+                        children: [{
+                            id: "964_4",
+                            name: "Neil Young",
+                            data: {
+                                relation: "<h4>Neil Young</h4><b>Connections:</b><ul><li>Neil Young &amp; Pearl Jam <div>(relation: collaboration)</div></li></ul>"
+                            },
+                            children: []
+                        }]
+                    }, {
+                        id: "236797_5",
+                        name: "Jeff Ament",
+                        data: {
+                            relation: "<h4>Jeff Ament</h4><b>Connections:</b><ul><li>Pearl Jam <div>(relation: member of band)</div></li><li>Temple of the Dog <div>(relation: member of band)</div></li><li>Mother Love Bone <div>(relation: member of band)</div></li><li>Green River <div>(relation: member of band)</div></li><li>M.A.C.C. <div>(relation: collaboration)</div></li><li>Three Fish <div>(relation: member of band)</div></li><li>Gossman Project <div>(relation: member of band)</div></li></ul>"
+                        },
+                        children: [{
+                            id: "346850_11",
+                            name: "Gossman Project",
+                            data: {
+                                relation: "<h4>Gossman Project</h4><b>Connections:</b><ul><li>Jeff Ament <div>(relation: member of band)</div></li></ul>"
+                            },
+                            children: []
+                        }]
+                    }, {
+                        id: "236583_23",
+                        name: "Mike McCready",
+                        data: {
+                            relation: "<h4>Mike McCready</h4><b>Connections:</b><ul><li>Pearl Jam <div>(relation: member of band)</div></li><li>Mad Season <div>(relation: member of band)</div></li><li>Temple of the Dog <div>(relation: member of band)</div></li><li>$10,000 Gold Chain <div>(relation: collaboration)</div></li><li>M.A.C.C. <div>(relation: collaboration)</div></li><li>The Rockfords <div>(relation: member of band)</div></li><li>Gossman Project <div>(relation: member of band)</div></li></ul>"
+                        },
+                        children: [{
+                            id: "346850_29",
+                            name: "Gossman Project",
+                            data: {
+                                relation: "<h4>Gossman Project</h4><b>Connections:</b><ul><li>Mike McCready <div>(relation: member of band)</div></li></ul>"
+                            },
+                            children: []
+                        }]
+                    }, {
+                        id: "236585_30",
+                        name: "Matt Cameron",
+                        data: {
+                            relation: "<h4>Matt Cameron</h4><b>Connections:</b><ul><li>Pearl Jam <div>(relation: member of band)</div></li><li>Soundgarden <div>(relation: member of band)</div></li><li>Temple of the Dog <div>(relation: member of band)</div></li><li>Eleven <div>(relation: supporting musician)</div></li><li>Queens of the Stone Age <div>(relation: member of band)</div></li><li>Wellwater Conspiracy <div>(relation: member of band)</div></li><li>M.A.C.C. <div>(relation: collaboration)</div></li><li>Tone Dogs <div>(relation: member of band)</div></li></ul>"
+                        },
+                        children: [{
+                            id: "65452_36",
+                            name: "M.A.C.C.",
+                            data: {
+                                relation: "<h4>M.A.C.C.</h4><b>Connections:</b><ul><li>Matt Cameron <div>(relation: collaboration)</div></li></ul>"
+                            },
+                            children: []
+                        }, {
+                            id: "353097_37",
+                            name: "Tone Dogs",
+                            data: {
+                                relation: "<h4>Tone Dogs</h4><b>Connections:</b><ul><li>Matt Cameron <div>(relation: member of band)</div></li></ul>"
+                            },
+                            children: []
+                        }]
+                    }
+        ],
+        data: {
+            relation: "<h4>Pearl Jam</h4><b>Connections:</b><ul><li>Pearl Jam &amp; Cypress Hill <div>(relation: collaboration)</div></li><li>Neil Young &amp; Pearl Jam <div>(relation: collaboration)</div></li><li>Jeff Ament <div>(relation: member of band)</div></li><li>Stone Gossard <div>(relation: member of band)</div></li><li>Eddie Vedder <div>(relation: member of band)</div></li><li>Mike McCready <div>(relation: member of band)</div></li><li>Matt Cameron <div>(relation: member of band)</div></li><li>Dave Krusen <div>(relation: member of band)</div></li><li>Matt Chamberlain <div>(relation: member of band)</div></li><li>Dave Abbruzzese <div>(relation: member of band)</div></li><li>Jack Irons <div>(relation: member of band)</div></li></ul>"
+        }
+    };

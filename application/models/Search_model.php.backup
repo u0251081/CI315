@@ -1,0 +1,203 @@
+<?php
+	class Search_model extends CI_Model {
+		public function __construct() {
+			$this->load->database();
+		}
+		
+		public function get_project($cond) {
+			$qString = 'select distinct(project_name), `year`, host_name from ia_relation where host_name = "'.$cond.'" ;';
+			$query = $this->db->query($qString);
+			$result = $query->result_array();
+			return $result;
+		}
+		
+		private function array_sort($array, $on ,$order = SORT_ASC) {
+			$new_array = array();
+			$sortable_array = array();
+			
+			if (count($array) > 0) {
+				foreach ($array as $k => $v) {
+					if (is_array($v)) {
+						foreach ($v as $k2 => $v2) {
+							if ($k2 == $on) {
+								$sortable_array[$k] = $v2;
+							}
+						}
+					} else {
+						$sortable_array[$k] = $v;
+					}
+				}
+				
+				switch ($order) {
+					case SORT_ASC:
+						asort($sortable_array);
+						break;
+					case SORT_DESC:
+						arsort($sortable_array);
+						break;
+				}
+				
+				foreach ($sortable_array as $k => $v) {
+					$new_array[$k] = $array[$k];
+				}
+			}
+			
+			return $new_array;
+		}
+		
+		public function get_colleges_a($abbr = FALSE) {
+			if ($abbr === FALSE) {
+				$query = $this->db->get('colleges');
+				return $query->result_array();
+			}
+		}
+		
+		public function get_departments_ea($eabbr = FALSE) {
+			if ($eabbr === FALSE) {
+				$query = $this->db->get('departments');
+				return $query->result_array();
+			}
+		}
+		
+		public function get_faculty($condition = FALSE) {
+			$columns = array(
+				'c_cname',
+				'd_cname',
+				'd_cabbr',
+				'name',
+				'PP',
+				'phone',
+				'extension',
+				'fax',
+				'email',
+				'specialized',
+				'classify'
+			);
+			$s_columns = implode(', ',$columns);
+			$qString = 'select faculty.id, '.$s_columns.' from faculty ';
+			$qString .= 'left join colleges on College = colleges.id ';
+			$qString .= 'left join departments on Department = departments.id ';
+			if ($condition !== FALSE) {
+				$s_cond = array();
+				$conds = explode(" ", $condition);
+				foreach ($columns as $col) {
+					$s_cond[$col] = '(';
+				}
+				foreach ($conds as $cond) {
+					foreach ($columns as $col) {
+						if (($col !== 'd_cname') and ($col !== 'c_cname')) {
+							$s_cond[$col] .= '('.$col.' like "%'.$cond.'%" ) or ';
+						} else {
+							$s_cond[$col] .= '('.$col.' = "'.$cond.'" ) or ';
+						}
+					}
+				}
+				foreach ($columns as $col) {
+					$s_cond[$col] .= '0)';
+				}
+				$s_condition = implode(' or ',$s_cond);
+				// print_r($s_cond);
+				// echo $s_condition;
+				/*
+				$num = count($conds);
+				$s_cond1 = array();
+				$s_cond2 = array();
+				foreach ($columns as $col) :
+					$s_cond1[$col] = '(';
+					$s_cond2[$col] = '(';
+				endforeach;
+				for ($i = 0; $i < $num; $i++) {
+					foreach ($columns as $col):
+						if(($col !== 'd_cname') and ($col !== 'c_cname')) {
+							$s_cond1[$col] .= ' ('.$col.' like "%'.$conds[$i].'%") and';
+							$s_cond2[$col] .= ' ('.$col.' like "%'.$conds[$i].'%") or';
+						} else {
+							$s_cond1[$col] .= ' ('.$col.' = "'.$conds[$i].'") and';
+							$s_cond2[$col] .= ' ('.$col.' = "'.$conds[$i].'") or';
+						}
+					endforeach;
+				}
+				foreach ($columns as $col) :
+					$s_cond1[$col] .= ' 1 )';
+					$s_cond2[$col] .= ' 0 )';
+				endforeach;
+				$scond1 = '( '.implode(' or ',$s_cond1).' )';
+				$scond2 = '( '.implode(' or ',$s_cond2).' )';
+				$scond2 = '( '.$scond2.' and '.'( not '.$scond1.')'.')';
+				$qString1 = $qString.'where '.$scond1;
+				$qString2 = $qString.'where '.$scond2;
+				$qString3 = $qString.'where '.$s_condition;
+				$query1 = $this->db->query($qString1);
+				$query2 = $this->db->query($qString2);
+				$query3 = $this->db->query($qString3);
+				$result1 = $query1->result_array();
+				$result2 = $query2->result_array();
+				$result3 = $query3->result_array();
+				print_r($result3);
+				$result = array_merge($result1,$result2);
+				*/
+				$qString = $qString.'where '.$s_condition;
+				$query = $this->db->query($qString);
+				$result = $query->result_array();
+			} else {
+				$query = $this->db->query($qString);
+				$result = $query->result_array();
+			}
+			foreach ($result as &$item) {
+				$rating = 0;
+				$stmp = implode(' ',$item);
+				if (isset ($conds)) {
+					foreach ($conds as $cond) {
+						if(stristr($stmp, $cond) !== FALSE) {
+							$rating++;
+						}
+					}
+				}
+				$item['rating'] = $rating;
+			}
+			$result = $this->array_sort($result, 'rating', SORT_DESC);
+			return $result;
+		}
+		
+		public function get_profile($cond = FALSE) {
+			$columns = array(
+				'c_cname',
+				'd_cname',
+				'd_cabbr',
+				'name',
+				'PP',
+				'phone',
+				'extension',
+				'fax',
+				'email',
+				'specialized',
+				'classify'
+			);
+			$s_columns = implode(', ',$columns);
+			$qString = 'select faculty.id, '.$s_columns.' from faculty ';
+			$qString .= 'left join colleges on College = colleges.id ';
+			$qString .= 'left join departments on Department = departments.id ';
+			$qString .= 'where faculty.id = "'.$cond.'";';
+			$query = $this->db->query($qString);
+			$result = $query->result_array();
+			$qString = 'select code,code_expertise.expertise from relation ';
+			$qString .= 'left join code_expertise on code = relation.expertise ';
+			$qString .= 'where t_id = "'.$cond.'";';
+			$query = $this->db->query($qString);
+			$result[0]['expertise'] = $query->result_array();
+			return $result;
+		}
+		
+		public function get_expertise($cond = FALSE) {
+			$qString = 'select distinct id, name from faculty ';
+			$qString .= 'left join relation on id = t_id ';
+			$qString .= 'where expertise = "'.$cond.'";';
+			if ($cond != "") {
+				$query = $this->db->query($qString);
+				$result = $query->result_array();
+			} else {
+				$result = null;
+			}
+			return $result;
+		}
+	}
