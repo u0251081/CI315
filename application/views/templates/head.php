@@ -92,29 +92,42 @@
 
                 </div>
                 <div class="navbar-collapse collapse ">
+                    
                     <ul class="nav navbar-nav">
-                        <li><a href="<?php echo base_url('index.php')?>">首頁</a></li>
-                        <li class="dropdown ">
-                            <a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">中心簡介 <b class=" icon-angle-down"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="<?php echo base_url('index.php')?>">創立緣起</a></li>
-                                <li><a href="<?php echo base_url('index.php')?>">中心任務</a></li>
-								<li><a href="<?php echo base_url('index.php')?>">組織架構</a></li>
-								<li><a href="<?php echo base_url('index.php')?>">培育領域</a></li>
-								<li><a href="<?php echo base_url('index.php')?>">培育資源</a></li>
-								<li><a href="<?php echo base_url('index.php')?>">空間租用</a></li>
+                        <li id="menu-button-index" ><a href="<?php echo base_url('index.php')?>">首頁</a></li>
+                        <li id="menu-button-descript" ><a href="<?php echo base_url('index.php')?>">中心簡介</a></li>
+                        <li id="menu-button-new"><a  href="<?php echo base_url('index.php')?>">最新消息</a></li>
+                        <li id="menu-button-team"><a  href="<?php echo base_url('index.php/home/about')?>">服務團隊</a></li>
+                        <li id="menu-button-search"><a href="<?php echo base_url('index.php')?>">人才搜尋</a></li>
+                        <li id="menu-button-coorp" ><a href="<?php echo base_url('index.php')?>">進駐辦法</a></li>
+                        <li id="menu-button-manufacter" ><a href="<?php echo base_url('index.php')?>">廠商櫥窗</a></li>
+                        <li id="menu-button-activity" ><a href="<?php echo base_url('index.php')?>">活動花絮</a></li>
+                        <li id="menu-button-patner" ><a href="<?php echo base_url('index.php')?>">策略夥伴</a></li>
+                        <li id="menu-button-location"><a href="<?php echo base_url('index.php')?>">地理位置</a></li>
 
-                            </ul>
-                        </li>
-                        <li><a href="<?php echo base_url('index.php')?>">最新消息</a></li>
-                        <li><a href="<?php echo base_url('index.php/home/about')?>">服務團隊</a></li>
-                        <li class="active"><a href="<?php echo base_url('index.php')?>">人才搜尋</a></li>
-                        <li><a href="<?php echo base_url('index.php')?>">進駐辦法</a></li>
-                        <li><a href="<?php echo base_url('index.php')?>">廠商櫥窗</a></li>
-                        <li><a href="<?php echo base_url('index.php')?>">活動花絮</a></li>
-                        <li><a href="<?php echo base_url('index.php')?>">策略夥伴</a></li>
-                        <li><a href="<?php echo base_url('index.php')?>">地理位置</a></li>
-                       
+                        <!-- Menu Button active controller -->
+                        <script type="text/javascript">
+                        
+                            var loc = window.location.pathname.split('/');
+                            lastSegment = loc.pop() || loc.pop();
+                           
+                            switch (lastSegment){
+                                case 'index.php':
+                                    document.getElementById("menu-button-index").classList.add("active");
+                                    break;
+                                case 'searchs':
+                                    document.getElementById("menu-button-search").classList.add("active");
+                                    break;
+                                    
+
+                            }
+
+                           
+
+
+                        </script>
+
+
                     </ul>
                 </div>
             </div>
