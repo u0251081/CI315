@@ -35,14 +35,13 @@ class Home extends CI_Controller {
 		$this->load->view('templates/head');
 		$this->load->view('templates/subtitle');
 		$this->load->view('templates/sidebar_head');
-		$this->load->view('templates/content/content_head',$data);
-		$this->load->view('search/body', $data);
-		$this->load->view('search/bottom', $pageData);
-		$this->load->view('templates/content/content_foot');
+
+		$this->load->view('home/Home',$data);
+
 		$this->load->view('templates/sidebar_foot');
 		$this->load->view('templates/footer.php');
 	}
-	
+
 
 	/**
 		search page view controller

@@ -1,18 +1,9 @@
-
-<!--=====================Content======================-->
-
-			<div class="col-lg-8">
+<div class="col-lg-8">
 				
-				<ul class="nav nav-tabs">
-
-					<li><a href="#asd" data-toggle="tab"><i class="icon-briefcase"></i> 首頁</a></li>
-					<li class="active"><a href="#two" data-toggle="tab"> 列表示搜尋</a></li>
-					<li><a href="#three" data-toggle="tab"> 圖形化搜尋</a></li>
-									
-				</ul>
 				<div class="tab-content">
+				
 
-					<div class="tab-pane" id="asd">
+					
 
 
 						<?php
@@ -71,7 +62,7 @@
 
 
 						
-						<article id="home-page">
+						<article class="home-page">
 							<div class="post-image">
 								<div class="post-heading">
 									<h3><a href="#">首頁廠商消息範例(一張圖)</a></h3>
@@ -167,8 +158,7 @@
 								<a href="#" class="pull-right">Continue reading <i class="icon-angle-right"></i></a>
 							</div>
 						</article>
-					</div>
+				</div>
+</div>
 
-					<div class="tab-pane active"" id="two">
-						
-						
+					
