@@ -12,8 +12,41 @@ class Home extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->model('Act_model');
 	}
+	/**
+		Home page view controller
+	*/
+	public function index(){
+		session_start();
+		$data['facultymembers'] = $this->Search_model->get_faculty();
+		$data['Comments'] = $this->Act_model->get_act();
+		$arrSize = count($data['facultymembers']);
+		$per = 5;
+		$pageNum = 1;
+		$current = 1;
+		if($arrSize >= 5){
+			$pageNum = $arrSize/$per;
+			$remainder = $arrSize%$per;
+		}
+		$pageData['amount'] = $pageNum;
+		$pageData['current'] = $current;
+		$data['page'] = $current;
+		$_SESSION['data'] = $data;
+
+		$this->load->view('templates/head');
+		$this->load->view('templates/subtitle');
+		$this->load->view('templates/sidebar_head');
+		$this->load->view('templates/content/content_head',$data);
+		$this->load->view('search/body', $data);
+		$this->load->view('search/bottom', $pageData);
+		$this->load->view('templates/content/content_foot');
+		$this->load->view('templates/sidebar_foot');
+		$this->load->view('templates/footer.php');
+	}
 	
-	
+
+	/**
+		search page view controller
+	*/
 	public function searchs($cond = FALSE){
 		session_start();
 		$cond = $this->input->post('cond');
@@ -27,8 +60,8 @@ class Home extends CI_Controller {
 			$this->load->view('templates/subtitle');
 			$this->load->view('templates/sidebar_head');
 			$this->load->view('templates/content/content_head',$data);
-			$this->load->view('home/body', $data);
-			$this->load->view('home/bottom');
+			$this->load->view('search/body', $data);
+			$this->load->view('search/bottom');
 			$this->load->view('templates/content/content_foot');
 			$this->load->view('templates/sidebar_foot');
 			$this->load->view('templates/footer.php');
@@ -55,41 +88,15 @@ class Home extends CI_Controller {
 			$this->load->view('templates/subtitle');
 			$this->load->view('templates/sidebar_head');
 			$this->load->view('templates/content/content_head',$data);
-			$this->load->view('home/body', $data);
-			$this->load->view('home/bottom', $pageData);
+			$this->load->view('search/body', $data);
+			$this->load->view('search/bottom', $pageData);
 			$this->load->view('templates/content/content_foot');
 			$this->load->view('templates/sidebar_foot');
 			$this->load->view('templates/footer.php');
 	
 		}
 	}
-	public function index(){
-		session_start();
-		$data['facultymembers'] = $this->Search_model->get_faculty();
-		$data['Comments'] = $this->Act_model->get_act();
-		$arrSize = count($data['facultymembers']);
-		$per = 5;
-		$pageNum = 1;
-		$current = 1;
-		if($arrSize >= 5){
-			$pageNum = $arrSize/$per;
-			$remainder = $arrSize%$per;
-		}
-		$pageData['amount'] = $pageNum;
-		$pageData['current'] = $current;
-		$data['page'] = $current;
-		$_SESSION['data'] = $data;
-
-		$this->load->view('templates/head');
-		$this->load->view('templates/subtitle');
-		$this->load->view('templates/sidebar_head');
-		$this->load->view('templates/content/content_head',$data);
-		$this->load->view('home/body', $data);
-		$this->load->view('home/bottom', $pageData);
-		$this->load->view('templates/content/content_foot');
-		$this->load->view('templates/sidebar_foot');
-		$this->load->view('templates/footer.php');
-	}
+	
 	public function about(){
 		
 
@@ -118,8 +125,8 @@ class Home extends CI_Controller {
 		$this->load->view('templates/subtitle');
 		$this->load->view('templates/sidebar_head');
 		$this->load->view('templates/content/content_head',$data);
-		$this->load->view('home/body', $data);
-		$this->load->view('home/bottom', $pageData);
+		$this->load->view('search/body', $data);
+		$this->load->view('search/bottom', $pageData);
 		$this->load->view('templates/content/content_foot');
 		$this->load->view('templates/sidebar_foot');
 		$this->load->view('templates/footer.php');

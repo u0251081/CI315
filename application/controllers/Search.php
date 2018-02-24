@@ -15,28 +15,28 @@ class Search extends CI_Controller {
 		$cond = $this->input->post('cond');
 		$data['facultymembers'] = $this->Search_model->get_faculty($cond);
 		$data['title'] = 'test condition = "'.$cond.'"';
-		$this->load->view('search/result', $data);
+		$this->load->view('search_testing/result', $data);
 	}
 	
 	public function profile($cond = FALSE){
 		$cond = $this->input->post('cond');
 		$data['profile'] = $this->Search_model->get_profile($cond);
 		$data['title'] = 'test condition = "'.$cond.'"';
-		$this->load->view('search/profile', $data);
+		$this->load->view('search_testing/profile', $data);
 	}
 	
 	public function expertise($cond = FALSE){
 		$cond = $this->input->post('cond');
 		$data['expertise'] = $this->Search_model->get_expertise($cond);
 		$data['title'] = 'test condition = "'.$cond.'"';
-		$this->load->view('search/expertise', $data);
+		$this->load->view('search_testing/expertise', $data);
 	}
 	
 	public function project($cond = FALSE) {
 		$cond = $this->input->post('cond');
 		$data['project'] = $this->Search_model->get_project($cond);
 		$data['title'] = 'project host = "'.$cond.'"';
-		$this->load->view('search/project', $data);
+		$this->load->view('search_testing/project', $data);
 	}
 	public function jsont($cond = FALSE){
 		$cond = $this->input->post('cond');
@@ -196,6 +196,6 @@ class Search extends CI_Controller {
 	public function index(){
 		$data['facultymembers'] = $this->Search_model->get_faculty();
 		$data['title'] = 'test all';
-		$this->load->view('search/result', $data);
+		$this->load->view('search_testing/result', $data);
 	}
 }
