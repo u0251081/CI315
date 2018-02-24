@@ -20,7 +20,7 @@
 					<!-- <h5 class="widgetheading">搜尋</h5> -->
 					    <fieldset>
 					    	<div class="row">
-					    			<?php echo form_open('home/searchs') ?>
+					    			<?php echo form_open('search') ?>
 					    			<!-- <script type="text/javascript">
 					    				loadJSON('http://163.18.53.149/IICwebsite/ci315/index.php/home/jsont',
 									         function(data) { console.log(data); json = data;init(window.json);},

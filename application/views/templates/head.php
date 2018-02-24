@@ -95,7 +95,7 @@
                     
                     <ul class="nav navbar-nav">
                         <li id="menu-button-index" ><a href="<?php echo base_url('index.php')?>">首頁</a></li>
-                        <li id="menu-button-descript" ><a href="<?php echo base_url('index.php')?>">中心簡介</a></li>
+                        <li id="menu-button-descript" ><a href="<?php echo base_url('index.php/description')?>">中心簡介</a></li>
                         <li id="menu-button-new"><a  href="<?php echo base_url('index.php')?>">最新消息</a></li>
                         <li id="menu-button-team"><a  href="<?php echo base_url('index.php/home/about')?>">服務團隊</a></li>
                         <li id="menu-button-search"><a href="<?php echo base_url('index.php')?>">人才搜尋</a></li>
@@ -115,10 +115,10 @@
                                 case 'index.php':
                                     document.getElementById("menu-button-index").classList.add("active");
                                     break;
-                                case 'searchs':
+                                case 'search':
                                     document.getElementById("menu-button-search").classList.add("active");
                                     break;
-                                    
+
 
                             }
 
