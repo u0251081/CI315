@@ -8,9 +8,12 @@
 <meta name="author" content="http://bootstraptaste.com" />
 <!--basic css -->
 <link href="<?php echo base_url('userfile/tests/css/bootstrap.min.css') ?>" rel="stylesheet" />
-<link href="<?php echo base_url('userfile/') ?>tests/css/style.css" rel="stylesheet" />
-<link href="<?php echo base_url('userfile/') ?>tests/css/defaults.css" rel="stylesheet" />
+<link href="<?php echo base_url('userfile/tests/css/style.css') ?>" rel="stylesheet" />
+<link href="<?php echo base_url('userfile/tests/css/defaults.css') ?>" rel="stylesheet" />
 <link href="<?php echo base_url('userfile/tests/css/flexslider.css') ?>" rel="stylesheet" />
+<link href="<?php echo base_url('userfile/tests/css/jcarousel.css') ?>" rel="stylesheet" />
+<link href="<?php echo base_url('userfile/tests/css/jquery.fancybox.css') ?>" rel="stylesheet" />
+
 
 <link href="<?php echo base_url('userfile/lib/font-awesome/css/font-awesome.min.css') ?>" rel="stylesheet">
 <link href="<?php echo base_url('userfile/lib/owlcarousel/owl.carousel.min.css') ?>" rel="stylesheet">
@@ -96,14 +99,14 @@
                     <ul class="nav navbar-nav">
                         <li id="menu-button-index" ><a href="<?php echo base_url('index.php')?>">首頁</a></li>
                         <li id="menu-button-descript" ><a href="<?php echo base_url('index.php/description')?>">中心簡介</a></li>
-                        <li id="menu-button-new"><a  href="<?php echo base_url('index.php')?>">最新消息</a></li>
-                        <li id="menu-button-team"><a  href="<?php echo base_url('index.php/home/about')?>">服務團隊</a></li>
-                        <li id="menu-button-search"><a href="<?php echo base_url('index.php')?>">人才搜尋</a></li>
-                        <li id="menu-button-coorp" ><a href="<?php echo base_url('index.php')?>">進駐辦法</a></li>
-                        <li id="menu-button-manufacter" ><a href="<?php echo base_url('index.php')?>">廠商櫥窗</a></li>
-                        <li id="menu-button-activity" ><a href="<?php echo base_url('index.php')?>">活動花絮</a></li>
-                        <li id="menu-button-patner" ><a href="<?php echo base_url('index.php')?>">策略夥伴</a></li>
-                        <li id="menu-button-location"><a href="<?php echo base_url('index.php')?>">地理位置</a></li>
+                        <li id="menu-button-new"><a  href="<?php echo base_url('index.php/news')?>">最新消息</a></li>
+                        <li id="menu-button-team"><a  href="<?php echo base_url('index.php/team')?>">服務團隊</a></li>
+                        <li id="menu-button-search"><a href="<?php echo base_url('index.php/search')?>">人才搜尋</a></li>
+                        <li id="menu-button-coorp" ><a href="<?php echo base_url('index.php/coorp')?>">進駐辦法</a></li>
+                        <li id="menu-button-manufacter" ><a href="<?php echo base_url('index.php/manufacture')?>">廠商櫥窗</a></li>
+                        <li id="menu-button-activity" ><a href="<?php echo base_url('index.php/portfolio')?>">活動花絮</a></li>
+                        <li id="menu-button-patner" ><a href="<?php echo base_url('index.php/patner')?>">策略夥伴</a></li>
+                        <li id="menu-button-location"><a href="<?php echo base_url('index.php/location')?>">地理位置</a></li>
 
                         <!-- Menu Button active controller -->
                         <script type="text/javascript">
@@ -115,8 +118,32 @@
                                 case 'index.php':
                                     document.getElementById("menu-button-index").classList.add("active");
                                     break;
+                                case 'description':
+                                    document.getElementById("menu-button-descript").classList.add("active");
+                                    break;
+                                case 'news':
+                                    document.getElementById("menu-button-new").classList.add("active");
+                                    break;
+                                case 'team':
+                                    document.getElementById("menu-button-team").classList.add("active");
+                                    break;
                                 case 'search':
                                     document.getElementById("menu-button-search").classList.add("active");
+                                    break;
+                                case 'coorp':
+                                    document.getElementById("menu-button-coorp").classList.add("active");
+                                    break;
+                                case 'manufacture':
+                                    document.getElementById("menu-button-manufacter").classList.add("active");
+                                    break;
+                                case 'portfolio':
+                                    document.getElementById("menu-button-activity").classList.add("active");
+                                    break;
+                                case 'patner':
+                                    document.getElementById("menu-button-patner").classList.add("active");
+                                    break;
+                                case 'location':
+                                    document.getElementById("menu-button-location").classList.add("active");
                                     break;
 
 

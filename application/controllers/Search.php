@@ -66,15 +66,7 @@ class Search extends CI_Controller {
 		}
 	}
 	
-	public function about(){
-		
 
-		$this->load->view('templates/head');
-		$this->load->view('templates/subtitle');
-		$this->load->view('about_team');
-
-		$this->load->view('templates/footer.php');
-	}
 	public function page($cond){
 		session_start();
 		$data = $_SESSION['data'] ;
