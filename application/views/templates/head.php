@@ -68,7 +68,7 @@
             xhr.open("GET", path, true);
             xhr.send();
         };
-    loadJSON('http://163.18.53.149/IICwebsite/ci315/index.php/home/jsont',
+    loadJSON('http://163.18.53.149/IICwebsite/index.php/Search/jsont',
          function(data) { console.log(data); json = data;},
          function(xhr) { console.error(xhr); }
 );
@@ -115,6 +115,9 @@
                             lastSegment = loc.pop() || loc.pop();
                            
                             switch (lastSegment){
+                                case 'IICwebsite':
+                                    document.getElementById("menu-button-index").classList.add("active");
+                                    break;
                                 case 'index.php':
                                     document.getElementById("menu-button-index").classList.add("active");
                                     break;

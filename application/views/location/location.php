@@ -1,5 +1,5 @@
 <section id="content">
-			<iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.3655637461725!2d120.32606131448395!3d22.751810932103513!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDQ1JzA2LjUiTiAxMjDCsDE5JzQxLjciRQ!5e0!3m2!1szh-TW!2stw!4v1469114093792" style="border:0" allowfullscreen=""></iframe>
+			<iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.3655637461725!2d120.32606131448395!3d22.751810932103513!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDQ1JzA2LjUiTiAxMjDCsDE5JzQxLjciRQ!5e0!3m2!1szh-TW!2stw!4v1469114093792" style="border:0" allowfullscreen=""></iframe>
 			<div class="container">
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2">

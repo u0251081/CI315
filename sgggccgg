@@ -1,0 +1,35 @@
+[33mcommit af04a1519e98251ccf96719882c99e27f801a680[m[33m ([m[1;36mHEAD -> [m[1;32mnewPage[m[33m)[m
+Author: pulorsok <pulorsok@gmail.com>
+Date:   Sun Feb 25 19:40:54 2018 +0800
+
+    Add all branch page except portfolio and patner
+
+[33mcommit b7162b6095baada73b8d7064690a27f4bdd39c21[m
+Author: pulorsok <pulorsok@gmail.com>
+Date:   Sat Feb 24 21:17:38 2018 +0800
+
+    Complete center description pages
+
+[33mcommit 6dbc2e5e2b9a20c1065e646139df726e480a4ebb[m
+Author: pulorsok <pulorsok@gmail.com>
+Date:   Sat Feb 24 20:02:23 2018 +0800
+
+    Add navigation menu button active control
+
+[33mcommit 6b253c6ba84862f779d5b2a1de969efa582a2441[m[33m ([m[1;31morigin/HomePage_view[m[33m, [m[1;32mmaster[m[33m, [m[1;32mHomePage_view[m[33m)[m
+Author: pulorsok <pulorsok@gmail.com>
+Date:   Sat Feb 24 15:31:30 2018 +0800
+
+    Seperate the Manufacturers Activity from search page to home page
+
+[33mcommit f8b6e11d8d041eb3cd6791b7568e97fb176a477b[m
+Author: pulorsok <pulorsok@gmail.com>
+Date:   Sat Feb 24 15:02:08 2018 +0800
+
+    move all the view file in 'search
+
+[33mcommit 155497ab2f72f6f23bfa120465a9008a01396aa9[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: pulorsok <pulorsok@gmail.com>
+Date:   Wed Feb 21 17:54:49 2018 +0800
+
+    Inital at mac

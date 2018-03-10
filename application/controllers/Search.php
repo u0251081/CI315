@@ -96,7 +96,7 @@ class Search extends CI_Controller {
 		$this->load->view('templates/infovistest');
 	}
 	private function callInfovid(){
-		echo "<script type='text/javascript'>loadJSON('http://163.18.53.149/IICwebsite/ci315/index.php/home/jsont',function(data) { console.log(data); json = data;init(window.json);},function(xhr) { console.error(xhr); });</script>";
+		echo "<script type='text/javascript'>loadJSON('http://163.18.53.149/IICwebsite/index.php/seearch/jsont',function(data) { console.log(data); json = data;init(window.json);},function(xhr) { console.error(xhr); });</script>";
 	}
 	public function jsont(){
 		// $cond = $this->input->post('cond');
