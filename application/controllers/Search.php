@@ -30,7 +30,7 @@ class Search extends CI_Controller {
 			$this->load->view('templates/sidebar_head');
 			$this->load->view('templates/content/content_head',$data);
 			$this->load->view('search/body', $data);
-			$this->load->view('search/bottom');
+			$this->load->view('search/bottom' $pageData);
 			$this->load->view('templates/content/content_foot');
 			$this->load->view('templates/sidebar_foot');
 			$this->load->view('templates/footer.php');
