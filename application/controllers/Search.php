@@ -18,6 +18,7 @@ class Search extends CI_Controller {
 	*/
 	public function index($cond = FALSE){
 		session_start();
+
 		$cond = $this->input->post('cond');
 		$data['Comments'] = $this->Act_model->get_act();
 		$_SESSION['GraphicCondiction'] = $cond;
@@ -25,12 +26,25 @@ class Search extends CI_Controller {
 		if ($cond === FALSE) {
 			$data['facultymembers'] = $this->Search_model->get_faculty();
 			$data['title'] = 'test all';
+			$arrSize = count($data['facultymembers']);
+			$per = 5;
+			$pageNum = 1;
+			$current = 1;
+			if($arrSize >= 5){
+				$pageNum = $arrSize/$per;
+				$remainder = $arrSize%$per;
+			}
+			$pageData['amount'] = $pageNum;
+			$pageData['current'] = $current;
+			$tab['tab'] = 1;
+			$data['page'] = $current;
+			$_SESSION['data'] = $data;
 			$this->load->view('templates/head');
 			$this->load->view('templates/subtitle');
 			$this->load->view('templates/sidebar_head');
 			$this->load->view('templates/content/content_head',$data);
 			$this->load->view('search/body', $data);
-			$this->load->view('search/bottom');
+			$this->load->view('search/bottom', $pageData);
 			$this->load->view('templates/content/content_foot');
 			$this->load->view('templates/sidebar_foot');
 			$this->load->view('templates/footer.php');
@@ -96,7 +110,7 @@ class Search extends CI_Controller {
 		$this->load->view('templates/infovistest');
 	}
 	private function callInfovid(){
-		echo "<script type='text/javascript'>loadJSON('http://163.18.53.149/IICwebsite/index.php/seearch/jsont',function(data) { console.log(data); json = data;init(window.json);},function(xhr) { console.error(xhr); });</script>";
+		echo "<script type='text/javascript'>loadJSON('http://163.18.53.149/IICwebsite/index.php/search/jsont',function(data) { console.log(data); json = data;init(window.json);},function(xhr) { console.error(xhr); });</script>";
 	}
 	public function jsont(){
 		// $cond = $this->input->post('cond');
@@ -131,7 +145,7 @@ class Search extends CI_Controller {
 		$child = $this->ConstructJsonString($object);
 
 		$result = '{ 
-			
+			"id" : "123",
 			"name"     :  "'.$kernal.'",
 			"children" : [  '.$child.' ]
 		}';
@@ -144,7 +158,8 @@ class Search extends CI_Controller {
 
 		foreach ($object as  $value) {
 
-			$children = $this->ConstructJsonProjectString($value['project']);
+			// $children = $this->ConstructJsonProjectString($value['project']);
+			$children = "";
 			$temp = '{ 
 				"id"   : "'.$value['id'].'",
 				"name" : "'.$value['name'].'",

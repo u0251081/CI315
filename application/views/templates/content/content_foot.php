@@ -16,6 +16,36 @@
 				<div id="log"></div>
 
 			</div>
+<script type="text/javascript" >
+    var json;
+    function loadJSON(path, success, error){
+            
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function()
+            {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        if (success)
+                            success(JSON.parse(xhr.responseText));
+                    } else {
+                        if (error)
+                            error(xhr);
+                    }
+                }
+            };
+            xhr.open("GET", path, true);
+            xhr.send();
+        };
+    loadJSON('http://163.18.53.149/IICwebsite/index.php/Search/jsont',
+         function(data) { console.log(data); json = data;init(json);},
+         function(xhr) { console.error(xhr); }
+);
+    // var json2 = $.getJSON('http://163.18.53.149/IICwebsite/ci315/index.php/search/jsont');
+    // var s = JSON.parse(json2);
+   // window.alert(window.jsons);
+   // console.log('fuck me');
+
+</script>
 			<!-- <article>
 			  <div class="blog">
 			    <img src="<?php echo base_url('userfile/') ?>images/member.png" alt="" class="img_inner fleft">

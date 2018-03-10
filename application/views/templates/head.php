@@ -48,9 +48,8 @@
 
 
 <script type="text/javascript" >
-    var json
-    function loadJSON(path, success, error)
-        {
+    var json;
+    function loadJSON(path, success, error){
             
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function()
@@ -79,7 +78,7 @@
 
 </script>
 
-<body onload="init(window.json);">
+<body >
 <div id="wrapper">
 	<!-- start header -->
 	<header>

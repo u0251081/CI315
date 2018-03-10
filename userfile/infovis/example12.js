@@ -28,6 +28,7 @@ var Log = {
 
 
 function init(json){
+    console.log(json);
     //init data
 
 //     var json = {  
@@ -40,7 +41,7 @@ function init(json){
 //   "children": [ *other nodes or empty* ]  
 // };  
 
-//var json = require('./memeber.json');
+    
     //end
     var infovis = document.getElementById('infovis');
     var w = infovis.offsetWidth , h = infovis.offsetHeight ;
@@ -148,33 +149,33 @@ function init(json){
         }
     });
     //load JSON data
-    // var refreshBtn = document.getElementById('submitButton');
-    // refreshBtn.onclick = function(){
-    //   function loadJSON(path, success, error)
-    //     {
-    //         console.log('loadJson active');
-    //         var xhr = new XMLHttpRequest();
-    //         xhr.onreadystatechange = function()
-    //         {
-    //             if (xhr.readyState === XMLHttpRequest.DONE) {
-    //                 if (xhr.status === 200) {
-    //                     if (success)
-    //                         success(JSON.parse(xhr.responseText));
-    //                 } else {
-    //                     if (error)
-    //                         error(xhr);
-    //                 }
-    //             }
-    //         };
-    //         xhr.open("GET", path, true);
-    //         xhr.send();
-    //     };
+    var refreshBtn = document.getElementById('submitButton');
+    refreshBtn.onclick = function(){
+      function loadJSON(path, success, error)
+        {
+            console.log('loadJson active');
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function()
+            {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        if (success)
+                            success(JSON.parse(xhr.responseText));
+                    } else {
+                        if (error)
+                            error(xhr);
+                    }
+                }
+            };
+            xhr.open("GET", path, true);
+            xhr.send();
+        };
 
-    //   loadJSON('http://163.18.53.149/IICwebsite/ci315/index.php/home/jsont',
-    //      function(data) { console.log('fuck');console.log(data); rgraph.loadJSON(data);rgraph.refresh();},
-    //      function(xhr) { console.error(xhr); });
-    // }
-    // ctx.scale(3,3);
+      loadJSON('http://163.18.53.149/IICwebsite/index.php/search/jsont',
+         function(data) { console.log('fuck');console.log(data); rgraph.loadJSON(data);rgraph.refresh();},
+         function(xhr) { console.error(xhr); });
+    }
+
 
     rgraph.loadJSON(json);
     //trigger small animation
