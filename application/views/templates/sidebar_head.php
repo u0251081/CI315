@@ -100,7 +100,7 @@
 						<li><a href="#">Tutorial</a></li>
 						<li><a href="#">Development</a></li>
 					</ul>
-				</div> -->
+				</div>
 				<div class="widget">
 								<h5 class="widgetheading">策略夥伴</h5>
 								<ul class="recent">
@@ -116,5 +116,5 @@
 									<li><a href="#"><img src="<?php echo base_url('userfile/images/small/10.png') ?>"  /></a></li>
 								</ul>
 							</div>
-				</aside>
+				</aside> -->
 			</div>

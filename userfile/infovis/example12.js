@@ -40,7 +40,79 @@ function init(json){
 //    },  
 //   "children": [ *other nodes or empty* ]  
 // };  
-
+    var jsons={
+        id: "190_0",
+        name: "Fuck",
+        children: [
+                    {
+                        id: "107877_3",
+                        name: "Neil Young &amp; Pearl Jam",
+                        data: {
+                            relation: "<h4>Neil Young &amp; Pearl Jam</h4><b>Connections:</b><ul><li>Pearl Jam <div>(relation: collaboration)</div></li><li>Neil Young <div>(relation: collaboration)</div></li></ul>"
+                        },
+                        children: [{
+                            id: "964_4",
+                            name: "Neil Young",
+                            data: {
+                                relation: "<h4>Neil Young</h4><b>Connections:</b><ul><li>Neil Young &amp; Pearl Jam <div>(relation: collaboration)</div></li></ul>"
+                            },
+                            children: []
+                        }]
+                    }, {
+                        id: "236797_5",
+                        name: "Jeff Ament",
+                        data: {
+                            relation: "<h4>Jeff Ament</h4><b>Connections:</b><ul><li>Pearl Jam <div>(relation: member of band)</div></li><li>Temple of the Dog <div>(relation: member of band)</div></li><li>Mother Love Bone <div>(relation: member of band)</div></li><li>Green River <div>(relation: member of band)</div></li><li>M.A.C.C. <div>(relation: collaboration)</div></li><li>Three Fish <div>(relation: member of band)</div></li><li>Gossman Project <div>(relation: member of band)</div></li></ul>"
+                        },
+                        children: [{
+                            id: "346850_11",
+                            name: "Gossman Project",
+                            data: {
+                                relation: "<h4>Gossman Project</h4><b>Connections:</b><ul><li>Jeff Ament <div>(relation: member of band)</div></li></ul>"
+                            },
+                            children: []
+                        }]
+                    }, {
+                        id: "236585_30",
+                        name: "Mike McCready",
+                        data: {
+                            relation: "<h4>Mike McCready</h4><b>Connections:</b><ul><li>Pearl Jam <div>(relation: member of band)</div></li><li>Mad Season <div>(relation: member of band)</div></li><li>Temple of the Dog <div>(relation: member of band)</div></li><li>$10,000 Gold Chain <div>(relation: collaboration)</div></li><li>M.A.C.C. <div>(relation: collaboration)</div></li><li>The Rockfords <div>(relation: member of band)</div></li><li>Gossman Project <div>(relation: member of band)</div></li></ul>"
+                        },
+                        children: [{
+                            id: "236585_30",
+                            name: "Gossman Project",
+                            data: {
+                                relation: "<h4>Gossman Project</h4><b>Connections:</b><ul><li>Mike McCready <div>(relation: member of band)</div></li></ul>"
+                            },
+                            children: []
+                        }]
+                    }, {
+                        id: "236585_30",
+                        name: "Matt Cameron",
+                        data: {
+                            relation: "<h4>Matt Cameron</h4><b>Connections:</b><ul><li>Pearl Jam <div>(relation: member of band)</div></li><li>Soundgarden <div>(relation: member of band)</div></li><li>Temple of the Dog <div>(relation: member of band)</div></li><li>Eleven <div>(relation: supporting musician)</div></li><li>Queens of the Stone Age <div>(relation: member of band)</div></li><li>Wellwater Conspiracy <div>(relation: member of band)</div></li><li>M.A.C.C. <div>(relation: collaboration)</div></li><li>Tone Dogs <div>(relation: member of band)</div></li></ul>"
+                        },
+                        children: [{
+                            id: "236585_30",
+                            name: "M.A.C.C.",
+                            data: {
+                                relation: "<h4>M.A.C.C.</h4><b>Connections:</b><ul><li>Matt Cameron <div>(relation: collaboration)</div></li></ul>"
+                            },
+                            children: []
+                        }, {
+                            id: "353097_37",
+                            name: "Tone Dogs",
+                            data: {
+                                relation: "<h4>Tone Dogs</h4><b>Connections:</b><ul><li>Matt Cameron <div>(relation: member of band)</div></li></ul>"
+                            },
+                            children: []
+                        }]
+                    }
+        ],
+        data: {
+            relation: "<h4>Pearl Jam</h4><b>Connections:</b><ul><li>Pearl Jam &amp; Cypress Hill <div>(relation: collaboration)</div></li><li>Neil Young &amp; Pearl Jam <div>(relation: collaboration)</div></li><li>Jeff Ament <div>(relation: member of band)</div></li><li>Stone Gossard <div>(relation: member of band)</div></li><li>Eddie Vedder <div>(relation: member of band)</div></li><li>Mike McCready <div>(relation: member of band)</div></li><li>Matt Cameron <div>(relation: member of band)</div></li><li>Dave Krusen <div>(relation: member of band)</div></li><li>Matt Chamberlain <div>(relation: member of band)</div></li><li>Dave Abbruzzese <div>(relation: member of band)</div></li><li>Jack Irons <div>(relation: member of band)</div></li></ul>"
+        }
+    };
     
     //end
     var infovis = document.getElementById('infovis');
@@ -90,8 +162,8 @@ function init(json){
         },
 
         Label: {
-            type: 'Native',
-            size: 10,
+            type: 'SVG',
+            size: 20,
             color: '#000'
         },
 
@@ -109,6 +181,7 @@ function init(json){
             //Add the relation list in the right column.
             //This list is taken from the data property of each JSON node.
             $jit.id('inner-details').innerHTML = node.data.relation;
+
         },
         
         //Add the name of the node in the correponding label
@@ -117,11 +190,26 @@ function init(json){
         onCreateLabel: function(domElement, node){
             domElement.innerHTML = node.name;
             domElement.onclick = function(){
-                rgraph.onClick(node.id, {
-                    onComplete: function() {
-                        Log.write("done");
-                    }
+
+                var n = rgraph.graph.getNode(node.id);
+                if(!n) return;
+                var subnodes = n.getSubnodes(0);
+                var map = [];
+                for(var i=1; i<subnodes.length; i++){
+                    map.push(subnodes[i].id);
+                }
+
+                rgraph.op.removeNode(map.reverse(),{
+                    type: 'fade:seq',
+                    duration: 1000,
+                    fps: false
+                    
                 });
+                // rgraph.onClick(node.id, {
+                //     onComplete: function() {
+                //         Log.write("done");
+                //     }
+                // });
             };
         },
         //Change some label dom properties.
@@ -148,33 +236,8 @@ function init(json){
             style.left = (left - w / 2) + 'px';
         }
     });
-    //load JSON data
-    var refreshBtn = document.getElementById('submitButton');
-    refreshBtn.onclick = function(){
-      function loadJSON(path, success, error)
-        {
-            console.log('loadJson active');
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function()
-            {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        if (success)
-                            success(JSON.parse(xhr.responseText));
-                    } else {
-                        if (error)
-                            error(xhr);
-                    }
-                }
-            };
-            xhr.open("GET", path, true);
-            xhr.send();
-        };
+    
 
-      loadJSON('http://163.18.53.149/IICwebsite/index.php/search/jsont',
-         function(data) { console.log('fuck');console.log(data); rgraph.loadJSON(data);rgraph.refresh();},
-         function(xhr) { console.error(xhr); });
-    }
 
 
     rgraph.loadJSON(json);

@@ -30,15 +30,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$cond = $this->input->post('cond');
 			if ($cond !== FALSE) {
 				$data['profile'] = $this->Search_model->get_profile($cond);
-				$expertise = $dara['profile'];
-				$data['expertise'] = $this->Search_model->get_expertise($expertise[0]['expertise'][0]['code']);
+				$expertise = $data['profile'];
+				$data['expertise'] = $this->Search_model->get_expertise(@$expertise[0]['expertise'][0]['code']);
 				// unset($data['expertise'][$cond]);
 				$data['title'] = 'expertise condition = "'.$cond.'"';
-				$this->load->view('search/expertise', $data);
+				$this->load->view('search_testing/expertise', $data);
 			} else {
 				$date['expertise'] = 99;
 				$data['title'] = 'search expertise';
-				$this->load->view('search/expertise',  $data);
+				$this->load->view('search_testing/expertise',  $data);
 			}
 		}
 

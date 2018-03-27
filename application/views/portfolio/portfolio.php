@@ -1,77 +1,47 @@
-<section id="content">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<ul class="portfolio-categ filter">
-							<li class="all"><a href="#">All</a></li>
-							<li class="web active"><a href="#" title="">Web design</a></li>
-							<li class="icon"><a href="#" title="">Icons</a></li>
-							<li class="graphic"><a href="#" title="">Graphic design</a></li>
-						</ul>
-						<div class="clearfix">
-						</div>
-						<div class="row">
-							<section id="projects">
-								<ul id="thumbs" class="portfolio" style="height: 225px;"><li class="item-thumbs col-lg-3 design" data-id="id-0" data-type="web">
-										<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-										<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Portfolio name" href='<?php echo base_url('userfile/images/img/works/1.jpg')?>'>
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-										<!-- Thumb Image and Description -->
-										<img src='<?php echo base_url('userfile/images/img/works/1.jpg')?>' alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-									</li><li class="item-thumbs col-lg-3 design" data-id="id-0" data-type="web">
-										<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-										<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Portfolio name" href='<?php echo base_url('userfile/images/img/works/4.jpg')?>'>
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-										<!-- Thumb Image and Description -->
-										<img src='<?php echo base_url('userfile/images/img/works/4.jpg')?>' alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-									</li><li class="item-thumbs col-lg-3 photography" data-id="id-4" data-type="web">
-										<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-										<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Portfolio name" href='<?php echo base_url('userfile/images/img/works/5.jpg')?>'>
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-										<!-- Thumb Image and Description -->
-										<img src='<?php echo base_url('userfile/images/img/works/5.jpg')?>' alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-									</li><li class="item-thumbs col-lg-3 design" data-id="id-0" data-type="web">
-										<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-										<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Portfolio name" href='<?php echo base_url('userfile/images/img/works/7.jpg')?>'>
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-										<!-- Thumb Image and Description -->
-										<img src='<?php echo base_url('userfile/images/img/works/7.jpg')?>' alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-									</li>
-									<!-- Item Project and Filter Name -->
-									
-									<!-- End Item Project -->
-									<!-- Item Project and Filter Name -->
-									
-									<!-- End Item Project -->
-									<!-- Item Project and Filter Name -->
-									
-									<!-- End Item Project -->
-									<!-- Item Project and Filter Name -->
-									
-									<!-- End Item Project -->
-									<!-- Item Project and Filter Name -->
-									
-									<!-- End Item Project -->
-									<!-- Item Project and Filter Name -->
-									
-									<!-- End Item Project -->
-									
-									<!-- End Item Project -->
-									<!-- Item Project and Filter Name -->
-									
-									<!-- End Item Project -->
-								</ul>
-							</section>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+<!--活動花絮-->
+    <section id="album" class="portfolio bg-green">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    <h2>活動花絮</h2>
+                    <hr class="small">
+                    <h4>Albums</h4>
+                    <div class="row"> <!--相簿顯示-->
+                        <div>
+                            	<?php
+                            		if (is_array($portfolio)) {
+                            			$col = 0;
+                            			$row = 0;
+                            			foreach($portfolio as $item) {
+                            				if ($col == 0) {
+                            					echo "<tr>\n";
+                            				}
+                            				echo "<div class='col-md-6'>\n";
+                            				echo "<div class='portfolio-item'>\n";
+                            				echo "<a href='".site_url('portfolio/detail/').$item['id']."'>\n";
+                            				echo "<img class='img-portfolio img-responsive'";
+                            				echo "src='".base_url('userfile/images/portfolio/').$item['img']."'";
+                            				echo "alt='".$item['title']."'>\n";
+                            				echo "</a>\n";
+                            				echo "<p style='font-size: 20px'>";
+                            				echo $item['title'];
+                            				echo "</p>\n";
+                            				echo "</div>\n";
+                            				echo "</div>\n";
+                            				if ($col == 2) {
+                            					$col = 0;
+                            					echo "</tr>\n";
+                            				} else {
+                            					$col ++;
+                            				}
+                            			}
+                            		}
+                            	?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br><br><br><br>
+    </section>

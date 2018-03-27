@@ -1,5 +1,5 @@
 <h2><?php echo $title; ?></h2>
-<?php echo form_open('search/profile') ?>
+<?php echo form_open('testing/profile') ?>
 	<input type="text" name="cond">
 	<input type="submit">
 </form>

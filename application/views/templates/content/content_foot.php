@@ -6,11 +6,13 @@
 				
 
 				<div id="left-container">
-				    <div id="infovis"></div>    
+				    <div id="infovis"></div> 
 				</div>
 
 				
-					<div id="inner-details"></div>
+					<div id="inner-details">
+						   
+					</div>
 				
 
 				<div id="log"></div>

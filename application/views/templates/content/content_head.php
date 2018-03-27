@@ -11,7 +11,7 @@
 				</ul>
 				<div class="tab-content">
 <script type="text/javascript">
-	console.log('fuck');
+	
 	var header = document.getElementById("infovisActive");
 	console.log(header);
 	var btn = header.getElementsByClassName("infovisActive");

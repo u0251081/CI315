@@ -11,6 +11,7 @@ class Search extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->helper('url');
 		$this->load->model('Act_model');
+
 	}
 
 	/**
@@ -155,39 +156,49 @@ class Search extends CI_Controller {
 	}
 	private function ConstructJsonString($object){
 		$str = "";
-
+		if (is_array($object) || is_object($object))
+{
 		foreach ($object as  $value) {
 
-			// $children = $this->ConstructJsonProjectString($value['project']);
-			$children = "";
+			$ask = $this->Search_model->get_profile($value['id']);
+			
+			$ii = $this->Search_model->get_expertise(@$ask[0]['expertise'][0]['code']);
+
+
+
+
+			$children = $this->ConstructJsonProjectString($ii,$value['id']);
+			//$children = $value['expertise'];
+
 			$temp = '{ 
 				"id"   : "'.$value['id'].'",
 				"name" : "'.$value['name'].'",
-				"children" : [ '.$children.' ],
+				"children" : [ '.$children.' ] ,
 				"data" : "'.$value['PP'].'"
 			},';
 			$str = $str.$temp;
 			  
-		};
+		}}
 		$str = substr_replace($str, '', -1); // to get rid of extra comma
 
 		return $str;
 	}
-	private function ConstructJsonProjectString($object){
+	private function ConstructJsonProjectString($object,$shiftID){
 		$str = "";
-		
+		if (is_array($object) || is_object($object))
+{
 		foreach ($object as  $value) {
-
+			if($value['id'] !== $shiftID){
 			
-			$temp = '{ 
-				"id" : "'.$value['p_id'].'",
-				"name" : "'.$value['project_name'].'",
-				"data" : "'.$value['year'].'"
-			},';
-			$str = $str.$temp;
-			
+				$temp = '{ 
+					"id" : "'.$value['id'].'",
+					"name" : "'.$value['name'].'"
+					
+				},';
+				$str = $str.$temp;
+			}
 			  
-		};
+		}}
 		$str = substr_replace($str, '', -1); // to get rid of extra comma
 
 		return $str;
