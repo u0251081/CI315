@@ -146,7 +146,7 @@ class Search extends CI_Controller {
 		$child = $this->ConstructJsonString($object);
 
 		$result = '{ 
-			"id" : "123",
+			"id" : "0",
 			"name"     :  "'.$kernal.'",
 			"children" : [  '.$child.' ]
 		}';

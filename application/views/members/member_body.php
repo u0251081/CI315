@@ -58,6 +58,8 @@
 													if($relation_item['id'] != $profile[0]['id']){ ?>
 
 												<div class="item">
+
+										
 										              <a href="#" class="overlay-wrapper">
 										             
 										                <span class="overlay">

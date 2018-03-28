@@ -70,8 +70,10 @@ function removeNode(rgraph, nodeId){
     rgraph.op.removeNode(map.reverse(),{
         type: 'fade:seq',
         duration: 500,
-        fps: 30
-        
+        fps: 30,
+        onComplete: function(){
+                removeEdge(rgraph, nodeId);
+            }
     })
     
 }
@@ -84,23 +86,28 @@ function removeNode(rgraph, nodeId){
 */
 function removeEdge(rgraph, nodeId){
 
-    var graph = detectExtraNodes(nodeId, JsonData);
-    // var n = rgraph.graph.getNode(nodeId);
-    // if(!n) return;
-    // var subnodes = n.getSubnodes(1);
+    //var graph = detectExtraNodes(nodeId, JsonData);
+    var n = rgraph.graph.getNode(nodeId);
+    if(!n) return;
+    var subnodes = n.getSubnodes(1);
     var map = [];
-    for(var i = 0; i < graph.length; i++){
-        map.push([nodeId.toString(),graph[i].id.toString()]);
-    }
-    console.log(map)
+    // for(var i = 0; i < graph.length; i++){
+    //     
+    // }
+    // console.log(map)
+
+    n.eachAdjacency(function(adj){
+        if(adj.nodeTo.id !== "0")
+            map.push([nodeId,adj.nodeTo.id]);
+    });
+    console.log("fuck");
+    console.log(map);
     rgraph.op.removeEdge(map,{
-        type: 'fade:seq',
-        duration: 500,
-        fps: 30,
-        onComplete: function(){
-            removeNode(rgraph, nodeId);
-        }
-    })
+            type: 'fade:seq',
+            duration: 500,
+            fps: 30
+            
+        });
 }
 
 /*
@@ -152,7 +159,7 @@ function detectExtraNodes(current, origin){
 
 
 function init(data){
-    console.log(json);
+    
     //init data
     JsonData = data;
     var json = JSON.parse(JSON.stringify(JsonData));
@@ -169,7 +176,7 @@ function init(data){
         //Optional: create a background canvas that plots
         //concentric circles.
 
-        width: 680,
+        width: 600,
         height: 600,
 
        
@@ -192,9 +199,9 @@ function init(data){
         Node: {
             
             color: '#000',
-            dim:0.5,
+            dim:2,
             span:3,
-            
+            overridable:true
         },
         
         Edge: {
@@ -203,14 +210,18 @@ function init(data){
           CanvasStyles: {
             shadowColor: '#ccc',
             shadowBlur:20,
-          }
+          },
+          overridable:true
         },
+
 
         Label: {
             type: 'SVG',
-            size: 25,
-            color: '#000'
+            color: '#000',
+           
+
         },
+     
 
         Margin: {
             right: 100,
@@ -258,6 +269,8 @@ function init(data){
                 }
             };
         },
+
+
         //Change some label dom properties.
         //This method is called each time a label is plotted.
         onPlaceLabel: function(domElement, node){
