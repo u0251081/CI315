@@ -25,94 +25,139 @@ var Log = {
   }
 };
 
+/*
+    Add some node from current node
+    Parameter
+        rgraph : Canvas
+        graph  : input Nodes (Json String)
+*/
+function addNode(rgraph, nodeId){
+    //get graph to add
+    var graph = JSON.stringify(detectExtraNodes(nodeId, JsonData));
+    var tureGraph = eval('(' + graph + ')');
+
+    
+
+    //perform sum animation
+    rgraph.op.sum(tureGraph, {
+        type: 'fade:seq',
+        fps: 30,
+        duration: 500
+        
+    });
+}
+
+/*
+    Remove some node from current node
+    Parameter
+        rgraph : Canvas
+        graph  : remove Nodes id (String)
+*/
+function removeNode(rgraph, nodeId){
+    
+    //var graph = detectExtraNodes(nodeId, JsonData);
+    //get node ids to be removed
+    var n = rgraph.graph.getNode(nodeId);
+    if(!n) return;
+    var subnodes = n.getSubnodes(1);
+    var map = [];
+    for(var i = 0; i < subnodes.length; i++){
+        if(subnodes[i].id !== nodeId)
+            map.push(subnodes[i].id);
+    }
+    
+    //perform node-removing animation
+    rgraph.op.removeNode(map.reverse(),{
+        type: 'fade:seq',
+        duration: 500,
+        fps: 30
+        
+    })
+    
+}
+
+/*
+    Remove some Edge from current node
+    Parameter
+        rgraph : Canvas
+        graph  : remove Nodes id (String)
+*/
+function removeEdge(rgraph, nodeId){
+
+    var graph = detectExtraNodes(nodeId, JsonData);
+    // var n = rgraph.graph.getNode(nodeId);
+    // if(!n) return;
+    // var subnodes = n.getSubnodes(1);
+    var map = [];
+    for(var i = 0; i < graph.length; i++){
+        map.push([nodeId.toString(),graph[i].id.toString()]);
+    }
+    console.log(map)
+    rgraph.op.removeEdge(map,{
+        type: 'fade:seq',
+        duration: 500,
+        fps: 30,
+        onComplete: function(){
+            removeNode(rgraph, nodeId);
+        }
+    })
+}
+
+/*
+    cutdown the subnodes of current node
+    Parameter
+        initInput : orgin Json node data
+*/
+function cutdownNodes(initInput){
+    var obj = initInput;
+    var children = obj.children;
+
+    for (var i = children.length - 1; i >= 0; i--) {
+        children[i].children = [];
+    }
+    obj.children = children;
+    return obj;
+}
 
 
-function init(json){
+/*
+    Find out the subnodes from orgin data
+    Parameter
+        current : Id of current node
+*/
+function detectExtraNodes(current, origin){
+    var children = origin.children;
+    var graph = [
+        {
+            "id": current,
+            "adjacencies": []
+        }
+    ];
+    for (var i = children.length - 1; i >= 0; i--) {
+        if(children[i].id == current){
+            console.log(children[i]);
+            var childs = children[i].children;
+            for (var j = childs.length - 1; j >= 0; j--) {
+                var id = childs[j].id;
+                var obj = childs[j];
+                graph[0].adjacencies.push(id);
+                graph.push(obj);
+
+            }
+        }
+    }
+    console.log(graph);
+    return graph;
+}
+
+
+function init(data){
     console.log(json);
     //init data
+    JsonData = data;
+    var json = JSON.parse(JSON.stringify(JsonData));
+    json = cutdownNodes(json);
 
-//     var json = {  
-//   "id": "aUniqueIdentifier",  
-//   "name": "usually a nodes name",  
-//   "data": {  
-//     "some key": "some value",  
-//     "some other key": "some other value"  
-//    },  
-//   "children": [ *other nodes or empty* ]  
-// };  
-    var jsons={
-        id: "190_0",
-        name: "Fuck",
-        children: [
-                    {
-                        id: "107877_3",
-                        name: "Neil Young &amp; Pearl Jam",
-                        data: {
-                            relation: "<h4>Neil Young &amp; Pearl Jam</h4><b>Connections:</b><ul><li>Pearl Jam <div>(relation: collaboration)</div></li><li>Neil Young <div>(relation: collaboration)</div></li></ul>"
-                        },
-                        children: [{
-                            id: "964_4",
-                            name: "Neil Young",
-                            data: {
-                                relation: "<h4>Neil Young</h4><b>Connections:</b><ul><li>Neil Young &amp; Pearl Jam <div>(relation: collaboration)</div></li></ul>"
-                            },
-                            children: []
-                        }]
-                    }, {
-                        id: "236797_5",
-                        name: "Jeff Ament",
-                        data: {
-                            relation: "<h4>Jeff Ament</h4><b>Connections:</b><ul><li>Pearl Jam <div>(relation: member of band)</div></li><li>Temple of the Dog <div>(relation: member of band)</div></li><li>Mother Love Bone <div>(relation: member of band)</div></li><li>Green River <div>(relation: member of band)</div></li><li>M.A.C.C. <div>(relation: collaboration)</div></li><li>Three Fish <div>(relation: member of band)</div></li><li>Gossman Project <div>(relation: member of band)</div></li></ul>"
-                        },
-                        children: [{
-                            id: "346850_11",
-                            name: "Gossman Project",
-                            data: {
-                                relation: "<h4>Gossman Project</h4><b>Connections:</b><ul><li>Jeff Ament <div>(relation: member of band)</div></li></ul>"
-                            },
-                            children: []
-                        }]
-                    }, {
-                        id: "236585_30",
-                        name: "Mike McCready",
-                        data: {
-                            relation: "<h4>Mike McCready</h4><b>Connections:</b><ul><li>Pearl Jam <div>(relation: member of band)</div></li><li>Mad Season <div>(relation: member of band)</div></li><li>Temple of the Dog <div>(relation: member of band)</div></li><li>$10,000 Gold Chain <div>(relation: collaboration)</div></li><li>M.A.C.C. <div>(relation: collaboration)</div></li><li>The Rockfords <div>(relation: member of band)</div></li><li>Gossman Project <div>(relation: member of band)</div></li></ul>"
-                        },
-                        children: [{
-                            id: "236585_30",
-                            name: "Gossman Project",
-                            data: {
-                                relation: "<h4>Gossman Project</h4><b>Connections:</b><ul><li>Mike McCready <div>(relation: member of band)</div></li></ul>"
-                            },
-                            children: []
-                        }]
-                    }, {
-                        id: "236585_30",
-                        name: "Matt Cameron",
-                        data: {
-                            relation: "<h4>Matt Cameron</h4><b>Connections:</b><ul><li>Pearl Jam <div>(relation: member of band)</div></li><li>Soundgarden <div>(relation: member of band)</div></li><li>Temple of the Dog <div>(relation: member of band)</div></li><li>Eleven <div>(relation: supporting musician)</div></li><li>Queens of the Stone Age <div>(relation: member of band)</div></li><li>Wellwater Conspiracy <div>(relation: member of band)</div></li><li>M.A.C.C. <div>(relation: collaboration)</div></li><li>Tone Dogs <div>(relation: member of band)</div></li></ul>"
-                        },
-                        children: [{
-                            id: "236585_30",
-                            name: "M.A.C.C.",
-                            data: {
-                                relation: "<h4>M.A.C.C.</h4><b>Connections:</b><ul><li>Matt Cameron <div>(relation: collaboration)</div></li></ul>"
-                            },
-                            children: []
-                        }, {
-                            id: "353097_37",
-                            name: "Tone Dogs",
-                            data: {
-                                relation: "<h4>Tone Dogs</h4><b>Connections:</b><ul><li>Matt Cameron <div>(relation: member of band)</div></li></ul>"
-                            },
-                            children: []
-                        }]
-                    }
-        ],
-        data: {
-            relation: "<h4>Pearl Jam</h4><b>Connections:</b><ul><li>Pearl Jam &amp; Cypress Hill <div>(relation: collaboration)</div></li><li>Neil Young &amp; Pearl Jam <div>(relation: collaboration)</div></li><li>Jeff Ament <div>(relation: member of band)</div></li><li>Stone Gossard <div>(relation: member of band)</div></li><li>Eddie Vedder <div>(relation: member of band)</div></li><li>Mike McCready <div>(relation: member of band)</div></li><li>Matt Cameron <div>(relation: member of band)</div></li><li>Dave Krusen <div>(relation: member of band)</div></li><li>Matt Chamberlain <div>(relation: member of band)</div></li><li>Dave Abbruzzese <div>(relation: member of band)</div></li><li>Jack Irons <div>(relation: member of band)</div></li></ul>"
-        }
-    };
     
     //end
     var infovis = document.getElementById('infovis');
@@ -147,7 +192,7 @@ function init(json){
         Node: {
             
             color: '#000',
-            dim:2,
+            dim:0.5,
             span:3,
             
         },
@@ -163,7 +208,7 @@ function init(json){
 
         Label: {
             type: 'SVG',
-            size: 20,
+            size: 25,
             color: '#000'
         },
 
@@ -172,7 +217,21 @@ function init(json){
             bottom: 100
         },
 
+        Tips: {
+            enable: true,
 
+            onShow: function(tip, node){
+                var html = "<div class=\"tip-title\">" + node.name + "</div>";
+                var data = node.data;
+                if("days" in data) {
+                    html += "<b>Last modified:</b>" + data.days + " days ago";
+                }
+                if("size" in data){
+                    html += "<br /><b>File size:</b> " + Math.round(data.size/1024) + "KB";
+                }
+                tip.innerHTML = html;
+            }
+        },
 
       
      
@@ -191,25 +250,12 @@ function init(json){
             domElement.innerHTML = node.name;
             domElement.onclick = function(){
 
-                var n = rgraph.graph.getNode(node.id);
-                if(!n) return;
-                var subnodes = n.getSubnodes(0);
-                var map = [];
-                for(var i=1; i<subnodes.length; i++){
-                    map.push(subnodes[i].id);
+                var N_id = node.id;
+                if(!node.anySubnode())
+                    addNode(rgraph, N_id);
+                else{
+                    removeNode(rgraph, N_id);
                 }
-
-                rgraph.op.removeNode(map.reverse(),{
-                    type: 'fade:seq',
-                    duration: 1000,
-                    fps: false
-                    
-                });
-                // rgraph.onClick(node.id, {
-                //     onComplete: function() {
-                //         Log.write("done");
-                //     }
-                // });
             };
         },
         //Change some label dom properties.
