@@ -194,7 +194,6 @@
 							foreach ($item['project'] as $project) {
 								if (stristr($project['project_name'], $cond) !== FALSE) {
 									$rating++;
-									break;
 								}
 							}
 						}

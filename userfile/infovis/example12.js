@@ -54,7 +54,7 @@ function addNode(rgraph, nodeId){
         graph  : remove Nodes id (String)
 */
 function removeNode(rgraph, nodeId){
-    
+    console.log('remove Node start');
     //var graph = detectExtraNodes(nodeId, JsonData);
     //get node ids to be removed
     var n = rgraph.graph.getNode(nodeId);
@@ -69,13 +69,14 @@ function removeNode(rgraph, nodeId){
     //perform node-removing animation
     rgraph.op.removeNode(map.reverse(),{
         type: 'fade:seq',
-        duration: 500,
+        duration: 100,
         fps: 30,
         onComplete: function(){
                 removeEdge(rgraph, nodeId);
+                console.log('remove Node completed');
             }
     })
-    
+  
 }
 
 /*
@@ -85,7 +86,7 @@ function removeNode(rgraph, nodeId){
         graph  : remove Nodes id (String)
 */
 function removeEdge(rgraph, nodeId){
-
+    console.log('remove Edge start');
     //var graph = detectExtraNodes(nodeId, JsonData);
     var n = rgraph.graph.getNode(nodeId);
     if(!n) return;
@@ -100,13 +101,14 @@ function removeEdge(rgraph, nodeId){
         if(adj.nodeTo.id !== "0")
             map.push([nodeId,adj.nodeTo.id]);
     });
-    console.log("fuck");
-    console.log(map);
+
     rgraph.op.removeEdge(map,{
             type: 'fade:seq',
-            duration: 500,
-            fps: 30
-            
+            duration: 100,
+            fps: 30,
+            onComplete: function(){
+                console.log("remove edge completed")
+            }
         });
 }
 
@@ -142,7 +144,6 @@ function detectExtraNodes(current, origin){
     ];
     for (var i = children.length - 1; i >= 0; i--) {
         if(children[i].id == current){
-            console.log(children[i]);
             var childs = children[i].children;
             for (var j = childs.length - 1; j >= 0; j--) {
                 var id = childs[j].id;
@@ -153,7 +154,7 @@ function detectExtraNodes(current, origin){
             }
         }
     }
-    console.log(graph);
+    
     return graph;
 }
 
@@ -199,8 +200,8 @@ function init(data){
         Node: {
             
             color: '#000',
-            dim:2,
-            span:3,
+            dim:1,
+            span:2,
             overridable:true
         },
         
@@ -232,14 +233,15 @@ function init(data){
             enable: true,
 
             onShow: function(tip, node){
-                var html = "<div class=\"tip-title\">" + node.name + "</div>";
+                var html = "<div class=\"tip-title\"><h4>" + node.name + "</h4></div>";
                 var data = node.data;
-                if("days" in data) {
-                    html += "<b>Last modified:</b>" + data.days + " days ago";
+                if("PP" in data) {
+                    html += "<b>職稱:</b>" + data.PP ;
                 }
-                if("size" in data){
-                    html += "<br /><b>File size:</b> " + Math.round(data.size/1024) + "KB";
+                if("expertise" in data) {
+                    html += "<br><b>專長:</b>" + data.expertise ;
                 }
+               
                 tip.innerHTML = html;
             }
         },
@@ -253,18 +255,69 @@ function init(data){
             $jit.id('inner-details').innerHTML = node.data.relation;
 
         },
-        
+
         //Add the name of the node in the correponding label
         //and a click handler to move the graph.
         //This method is called once, on label creation.
         onCreateLabel: function(domElement, node){
             domElement.innerHTML = node.name;
             domElement.onclick = function(){
+                rgraph.tips.hide()
+                var data = node.data;
+                var html = '<div class="blog"><img src="" alt="" class="img_inner fleft"><div class="extra_wrapper">' +　
+                '<h3 class="blog_head color1"><a href="' + data.url + '">' + node.name + '</a></h3>' +
+                '<p><b>隸屬 :</b>' + data.c_cname +  ' ' + data.d_cname +'<br> <b>專長領域 : ' + data.specialized + '</b> </p>' + '</div></div>' + 
+                '<div class="bottom-article"><ul class="meta-post"><li><i class="icon-calendar"></i><a href="#">' + data.phone + '</a></li><li><i class="icon-comments"></i><a href="#">' +
+                data.email + '</a></li></ul><a href=' + data.url + ' class="pull-right">Continue reading <i class="icon-angle-right"></i></a></div>'
+
+        // <article id="detail-protofile">
+        //       <div class="blog">
+        //         <img src="" alt="" class="img_inner fleft">
+        //         <div class="extra_wrapper">
+        //           <h3 class="blog_head color1"><a href="">TEST</a></h3>
+        //           <p><b>隸屬 :</b>  <br> <b>專長領域 : </b> </p>
+        //         </div>
+        //       </div>
+
+
+        //       <div class="bottom-article">
+        //         <ul class="meta-post">
+        //           <li><i class="icon-calendar"></i><a href="#"></a></li>
+        //           <li><i class="icon-comments"></i><a href="#">weichih@ccms.nkfust.edu.tw </a></li>
+        //         </ul>
+        //         <a href="" class="pull-right">Continue reading <i class="icon-angle-right"></i></a>
+        //       </div>
+        // </article>
+
+
+                $jit.id("inner-details").innerHTML = html;
 
                 var N_id = node.id;
-                if(!node.anySubnode())
-                    addNode(rgraph, N_id);
-                else{
+                var n = rgraph.graph.getNode(N_id);
+                // if(!n) return;
+                var subnodes = n.getSubnodes(1);
+                var map = [];
+                // for(var i = 0; i < graph.length; i++){
+                //     
+                // }
+                // console.log(map)
+
+                n.eachAdjacency(function(adj){
+                    if(adj.nodeTo.id !== "0")
+                        map.push([N_id,adj.nodeTo.id]);
+                });
+                console.log(map)
+                if(!node.anySubnode()){
+                    console.log('no subnodes')
+                    // console.log(node.getAdjacency())
+                    if(Object.keys(map).length !== 0){
+                        console.log("map is empty")
+                        removeEdge(rgraph, N_id);
+                    }else{
+                        addNode(rgraph, N_id);
+                    }
+                    
+                }else{
                     removeNode(rgraph, N_id);
                 }
             };

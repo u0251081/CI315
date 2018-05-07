@@ -17,7 +17,7 @@ if( !isset($facultymembers[$i])) break;
   <div class="bottom-article">
     <ul class="meta-post">
       <li><i class="icon-calendar"></i><a href="#"><?php echo $facultymembers[$i]['phone'] ?></a></li>
-      <li><i class="icon-comments"></i><a href="#">weichih@ccms.nkfust.edu.tw </a></li>
+      <li><i class="icon-comments"></i><a href="#"><?php echo $facultymembers[$i]['email'] ?></a></li>
     </ul>
     <a href="<?php echo base_url('index.php').'/members/memberid/'.$facultymembers[$i]['id']?>" class="pull-right">Continue reading <i class="icon-angle-right"></i></a>
   </div>

@@ -10,9 +10,7 @@
 				</div>
 
 				
-					<div id="inner-details">
-						   
-					</div>
+					
 				
 
 				<div id="log"></div>
@@ -72,7 +70,8 @@
 			
 
 			    
-		<article>
+		<article id="detail-protofile">
+			<div id="inner-details">
 			  <div class="blog">
 			    <img src="" alt="" class="img_inner fleft">
 			    <div class="extra_wrapper">
@@ -89,6 +88,7 @@
 			    </ul>
 			    <a href="" class="pull-right">Continue reading <i class="icon-angle-right"></i></a>
 			  </div>
+			</div>
 		</article>
 			
 		</div> <!--tab pane two-->

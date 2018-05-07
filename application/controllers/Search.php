@@ -173,8 +173,21 @@ class Search extends CI_Controller {
 			$temp = '{ 
 				"id"   : "'.$value['id'].'",
 				"name" : "'.$value['name'].'",
-				"children" : [ '.$children.' ] ,
-				"data" : "'.$value['PP'].'"
+				"children" : [ '.$children.' ],
+				"data" : { 
+					"PP" : "'.$value['PP'].'",
+					"expertise" : "'.@$ask[0]['expertise'][0]['expertise'].'",
+					"c_cname" : "'.@$ask[0]['c_cname'].'",
+					"d_cname" : "'.@$ask[0]['d_cname'].'",
+					"d_cabbr" : "'.@$ask[0]['d_cabbr'].'",
+					"email" : "'.@$ask[0]['email'].'",
+					"phone" : "'.@$ask[0]['phone'].'",
+					"specialized" : "'.@$ask[0]['specialized'].'",
+					"classify" : "'.@$ask[0]['classify'].'",
+					"url" : "'.base_url('index.php').'/members/memberid/'.@$ask[0]['id'].'"
+
+
+				}
 			},';
 			$str = $str.$temp;
 			  
@@ -189,11 +202,22 @@ class Search extends CI_Controller {
 {
 		foreach ($object as  $value) {
 			if($value['id'] !== $shiftID){
-			
+				$ask = $this->Search_model->get_profile($value['id']);
 				$temp = '{ 
-					"id" : "'.$value['id'].'",
-					"name" : "'.$value['name'].'"
-					
+					"id" : "'.@$ask[0]['id'].'",
+					"name" : "'.@$ask[0]['name'].'",
+					"data" : { 
+						"PP" : "'.@$ask[0]['PP'].'",
+						"expertise" : "'.@$ask[0]['expertise'][0]['expertise'].'",
+						"c_cname" : "'.@$ask[0]['c_cname'].'",
+						"d_cname" : "'.@$ask[0]['d_cname'].'",
+						"d_cabbr" : "'.@$ask[0]['d_cabbr'].'",
+						"email" : "'.@$ask[0]['email'].'",
+						"phone" : "'.@$ask[0]['phone'].'",
+						"specialized" : "'.@$ask[0]['specialized'].'",
+						"classify" : "'.@$ask[0]['classify'].'",
+						"url" : "'.base_url('index.php').'/members/memberid/'.@$ask[0]['id'].'"
+						}
 				},';
 				$str = $str.$temp;
 			}
