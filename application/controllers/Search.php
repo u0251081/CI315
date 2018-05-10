@@ -23,7 +23,7 @@ class Search extends CI_Controller {
 		$cond = $this->input->post('cond');
 		$data['Comments'] = $this->Act_model->get_act();
 		$_SESSION['GraphicCondiction'] = $cond;
-		echo 'search'.$_SESSION['GraphicCondiction'];
+	
 		if ($cond === FALSE) {
 			$data['facultymembers'] = $this->Search_model->get_faculty();
 			$data['title'] = 'test all';

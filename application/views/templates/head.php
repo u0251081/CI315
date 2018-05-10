@@ -36,13 +36,6 @@
 <link rel="icon" href="<?php echo base_url('userfile/images/favicon.ico') ?>">
 <link rel="shortcut icon" href="<?php echo base_url('userfile/images/favicon.ico') ?>">
 
-<!-- =======================================================w
-    Theme Name: Moderna
-    Theme URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
-    Author: BootstrapMade
-    Author URL: https://bootstrapmade.com
-======================================================= -->
-
 </head>
 
 

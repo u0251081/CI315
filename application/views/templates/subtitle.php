@@ -44,17 +44,3 @@
 				</div>
 			</div>
 		</section>
-
-<!-- 	<section id="inner-headline">
-
-		<div class="container">
-			
-				<div class="col-lg-12">
-					
-						<center><h1>人 才 搜 尋 網</h1></center>
-					
-					
-				</div>
-			
-		</div>
-	</section>  -->
