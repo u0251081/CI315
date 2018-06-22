@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $config['base_url'] = '';
 if ($_SERVER['HTTP_HOST'] == 'localhost'){
-	$dir = 'IICwebsite/ci315';
+	$dir = 'IICwebsite';
 	$config['base_url'] = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/'.$dir;
 }
 
