@@ -1,4 +1,4 @@
 RewriteEngine on
-RewriteBase /ci315
+RewriteBase /IICwebsite
 RewriteCond $1 !^(index\.php|images|robots\.txt|userfile|$)
 RewriteRule ^(.*)$ index.php/$1 [L,QSA]
