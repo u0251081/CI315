@@ -1,4 +1,4 @@
 RewriteEngine on
 RewriteBase /IICwebsite
-RewriteCond $1 !^(index\.php|images|robots\.txt|userfile|$)
+RewriteCond $1 !^(index\.php|images|robots\.txt|userfile|uploads|$)
 RewriteRule ^(.*)$ index.php/$1 [L,QSA]

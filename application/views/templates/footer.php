@@ -70,7 +70,7 @@
 	<script src="<?php echo base_url('userfile/tests/jss/jquery.js') ?>"></script>
 	<script src="<?php echo base_url('userfile/tests/jss/jquery.easing.1.3.js') ?>"></script>
 	<script src="<?php echo base_url('userfile/tests/jss/jquery.fancybox.pack.js') ?>"></script>
-	<script src="<?php echo base_url('userfile/tests/jss/jquery.fancybox.,media.js') ?>"></script>
+	<script src="<?php echo base_url('userfile/tests/jss/jquery.fancybox-media.js') ?>"></script>
 	<script src="<?php echo base_url('userfile/tests/jss/jquery.flexslider.js') ?>"></script>
 	<script src="<?php echo base_url('userfile/tests/jss/animate.js') ?>"></script>
     <script src="<?php echo base_url('userfile/tests/jss/custom.js') ?>"></script>
