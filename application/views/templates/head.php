@@ -33,8 +33,8 @@
 
 
 
-<link rel="icon" href="<?php echo base_url('userfile/images/favicon.ico') ?>">
-<link rel="shortcut icon" href="<?php echo base_url('userfile/images/favicon.ico') ?>">
+<!-- <link rel="icon" href="<?php echo base_url('userfile/images/favicon.ico') ?>"> -->
+<!-- <link rel="shortcut icon" href="<?php echo base_url('userfile/images/favicon.ico') ?>"> -->
 
 </head>
 
