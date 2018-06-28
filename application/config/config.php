@@ -26,7 +26,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $config['base_url'] = '';
 if ($_SERVER['HTTP_HOST'] == 'localhost'){
 	$dir = 'IICwebsite';
-	$config['base_url'] = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/'.$dir;
+	$pattern = '|^(.*'.$dir.')|U';
+	$subject = $_SERVER['REQUEST_URI'];
+	preg_match_all("$pattern","$subject",$rst_uri);
+	$config['base_url'] = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/'.$rst_uri[0][0];
 }
 
 /*
